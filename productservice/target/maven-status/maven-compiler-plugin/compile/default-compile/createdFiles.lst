@@ -1,0 +1,5 @@
+com/ideas/springcloud/dto/Coupon.class
+com/ideas/springcloud/repos/ProductRepo.class
+com/ideas/springcloud/controllers/ProductRestController.class
+com/ideas/springcloud/model/Product.class
+com/ideas/springcloud/ProductserviceApplication.class
