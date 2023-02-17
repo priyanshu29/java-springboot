@@ -1,6 +1,48 @@
 version: "2.4"
 
 services:
+  mvn-coupon:
+    build:
+      context: .
+      dockerfile: ./couponservice/docker/maven/Dockerfile
+    container_name: mvn-coupon
+    platform: linux
+    isolation: default
+    mem_limit: 2G
+    mem_reservation: 2G
+    environment:
+      - TZ=America/Chicago
+      - LC_ALL=en_US
+      - JAVA_OPTS=-Xmx2g -Xms2g
+      - MAVEN_OPTS=-Xmx2g -Xms2g
+    volumes:
+      - .m2:/root/.m2
+      - ./couponservice:/repo
+    working_dir: /repo
+    entrypoint: mvn -B
+    command: clean install -Dskiptests
+
+  mvn-product:
+    build:
+      context: .
+      dockerfile: ./productservice/docker/maven/Dockerfile
+    container_name: mvn-product
+    platform: linux
+    isolation: default
+    mem_limit: 2G
+    mem_reservation: 2G
+    environment:
+      - TZ=America/Chicago
+      - LC_ALL=en_US
+      - JAVA_OPTS=-Xmx2g -Xms2g
+      - MAVEN_OPTS=-Xmx2g -Xms2g
+    volumes:
+      - .m2:/root/.m2
+      - ./productservice:/repo
+    working_dir: /repo
+    entrypoint: mvn -B
+    command: clean install -Dskiptests
+
   web-db:
     image: mysql:5.6
     container_name: web-db
@@ -9,7 +51,7 @@ services:
     ports:
       - "3010:3010"
     environment:
-      - MYSQL_DATABASE=mydb
+      - MYSQL_DATABASE=sample
       - MYSQL_USER=mysql
       - MYSQL_PASSWORD=supersecret
       - MYSQL_ROOT_PASSWORD=supersecret
@@ -24,7 +66,7 @@ services:
   coupon-app:
     build: 
       context: .
-      dockerfile: ./couponservice/Dockerfile
+      dockerfile: ./couponservice/docker/service/Dockerfile
     environment:
       - TZ=America/Chicago
     container_name: coupon-app
@@ -45,24 +87,5 @@ services:
     ports:
       - "8091:8091"
     depends_on:
-      - product-build
+      - web-db
       - coupon-app
-
-  product-build:
-
-    build:
-
-      context: .
-
-      dockerfile: ./productservice/docker/build/Dockerfile
-
-    environment:
-
-      - TZ=America/Chicago
-
-    container_name: mvn-app    
-
-    volumes:
-
-      - ./productservice/target:/productservice/target
- 
