@@ -1,6 +1,8 @@
 # Compiled class file
 *.class
 .m2/
+.infra/
+.terraform/
 
 # Log file
 *.log
