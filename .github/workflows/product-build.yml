@@ -1,0 +1,51 @@
+name: product-build
+
+on: workflow_dispatch 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+      
+    - name: Build with Maven
+      run: mvn -f productservice/pom.xml clean package install -DskipTests
+        
+    - name: Upload JAR
+      uses: actions/upload-artifact@v2.2.4
+      with:
+        name: productservice-0.0.1-SNAPSHOT.jar
+        path: /home/runner/.m2/repository/com/ideas/springcloud/productservice/0.0.1-SNAPSHOT/productservice-0.0.1-SNAPSHOT.jar
+    - name: Clone Repository
+      uses: actions/checkout@v2
+      with:
+          repository: priyanshu29/java-springboot
+          token: ${{ secrets.PAT }}
+
+    - name: Move Jar to Repository
+      run: mv /home/runner/.m2/repository/com/ideas/springcloud/productservice/0.0.1-SNAPSHOT/productservice-0.0.1-SNAPSHOT.jar productservice/
+
+    - name: Commit and Push Changes
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+       commit_message: upload-product-app
+       commit_user_name: Priyanshu
+       commit_user_email: actions@github.com
+       branch: dockerhub
+       pull_branch: false
+       push_options: '--force'
+       file_pattern: .
+       repository: .
+       commit_author: Priyanshu Tiwari <Priyanshu@users.noreply.github.com>
+       skip_dirty_check: true
+       skip_fetch: true
+       skip_checkout: true
+       disable_globbing: true
+       create_branch: true
+       internal_git_binary: git
