@@ -1,6 +1,6 @@
 # Compiled class file
 *.class
-.m2/
+*.m2/
 .infra/
 .terraform/
 
