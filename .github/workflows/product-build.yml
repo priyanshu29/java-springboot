@@ -1,10 +1,11 @@
 name: product-build
 
-on:
-  push:
-    branches:
-      - RDS_CI/CD
-#on: workflow_dispatch 
+#on:
+ # push:
+  #  branches:
+   #   - RDS_CI/CD
+on: workflow_dispatch 
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -41,7 +42,7 @@ jobs:
        commit_message: upload-product-app
        commit_user_name: Priyanshu
        commit_user_email: actions@github.com
-       branch: main
+       branch: RDS_CI/CD
        pull_branch: false
        push_options: '--force'
        file_pattern: .
