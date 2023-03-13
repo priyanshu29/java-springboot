@@ -1,10 +1,10 @@
 name: Build and Push Docker Image
 
-on:
-  push:
-    branches:
-      - RDS_CI/CD
-#on: workflow_dispatch 
+#on:
+ #  branches:
+  #    - RDS_CI/CD
+on: workflow_dispatch 
+
 env:
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
