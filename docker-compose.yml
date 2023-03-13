@@ -1,25 +1,25 @@
 version: "2.4"
 
 services:
-  web-db:
-    image: mysql:5.6
-    container_name: web-db
-    mem_limit: 2G
-    mem_reservation: 2G
-    ports:
-      - "3010:3010"
-    environment:
-      - MYSQL_DATABASE=mydb
-      - MYSQL_USER=mysql
-      - MYSQL_PASSWORD=supersecret
-      - MYSQL_ROOT_PASSWORD=supersecret
-    volumes:
-      - ./docker/mysql/sql:/docker-entrypoint-initdb.d/
-    command: "--default-authentication-plugin=mysql_native_password --lower_case_table_names=1 --character-set-server=utf8 --bind-address 0.0.0.0 --port 3010"
-    healthcheck:
-          test: "/etc/init.d/mysql status -P3310"
-          interval: 2s
-          retries: 10
+#   web-db:
+#     image: mysql:5.6
+#     container_name: web-db
+#     mem_limit: 2G
+#     mem_reservation: 2G
+#     ports:
+#       - "3010:3010"
+#     environment:
+#       - MYSQL_DATABASE=mydb
+#       - MYSQL_USER=mysql
+#       - MYSQL_PASSWORD=supersecret
+#       - MYSQL_ROOT_PASSWORD=supersecret
+#     volumes:
+#       - ./docker/mysql/sql:/docker-entrypoint-initdb.d/
+#     command: "--default-authentication-plugin=mysql_native_password --lower_case_table_names=1 --character-set-server=utf8 --bind-address 0.0.0.0 --port 3010"
+#     healthcheck:
+#           test: "/etc/init.d/mysql status -P3310"
+#           interval: 2s
+#           retries: 10
 
   coupon-app:
     build: 
@@ -28,41 +28,43 @@ services:
     environment:
       - TZ=America/Chicago
     container_name: coupon-app
+    image: priyanshu0998/coupon-app:latest
     mem_limit: 1G
     mem_reservation: 1G
     ports:
       - "8090:8090"
-    depends_on:
-      - web-db
+#     depends_on:
+#       - web-db
 
   product-app:
     build: 
       context: .
       dockerfile: ./productservice/docker/service/Dockerfile
     container_name: product-app
+    image: priyanshu0998/product-app:latest
     mem_limit: 1G
     mem_reservation: 1G
     ports:
       - "8091:8091"
-    depends_on:
-      - product-build
-      - coupon-app
+#     depends_on:
+#       - product-build
+#       - coupon-app
 
-  product-build:
+#   product-build:
 
-    build:
+#     build:
 
-      context: .
+#       context: .
 
-      dockerfile: ./productservice/docker/build/Dockerfile
+#       dockerfile: ./productservice/docker/build/Dockerfile
 
-    environment:
+#     environment:
 
-      - TZ=America/Chicago
+#       - TZ=America/Chicago
 
-    container_name: mvn-app    
+#     container_name: mvn-app    
 
-    volumes:
+#     volumes:
 
-      - ./productservice/target:/productservice/target
+#       - ./productservice/target:/productservice/target
  
