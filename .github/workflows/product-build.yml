@@ -34,7 +34,7 @@ jobs:
           token: ${{ secrets.PAT }}
 
     - name: Move Jar to Repository
-      run: mv /home/runner/.m2/repository/com/ideas/springcloud/productservice/0.0.1-SNAPSHOT/productservice-0.0.1-SNAPSHOT.jar productservice/
+      run: mv /home/runner/.m2/repository/com/ideas/springcloud/productservice/0.0.1-SNAPSHOT/productservice-0.0.1-SNAPSHOT.jar productservice/target/
 
     - name: Commit and Push Changes
       uses: stefanzweifel/git-auto-commit-action@v4
