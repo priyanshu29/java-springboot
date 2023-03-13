@@ -1,10 +1,11 @@
 name: coupon-build
 
-on:
-  push:
-    branches:
-      - RDS_CI/CD
-#on: workflow_dispatch 
+#on:
+ # push:
+ #   branches:
+#      - RDS_CI/CD
+on: workflow_dispatch 
+
 jobs:
   build:
     runs-on: ubuntu-latest
