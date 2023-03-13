@@ -42,7 +42,7 @@ jobs:
        commit_message: upload-coupon-app
        commit_user_name: Priyanshu
        commit_user_email: actions@github.com
-       branch: main
+       branch: RDS_CI/CD
        pull_branch: false
        push_options: '--force'
        file_pattern: .
