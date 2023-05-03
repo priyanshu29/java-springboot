@@ -1,5 +1,4 @@
 # Configure the AWS provider
-
 provider "aws" {
 
   region = "ap-south-1" # Replace with your desired region
@@ -13,16 +12,11 @@ data "aws_vpc" "defaultvpc" {
 }
 
 
- 
-
 data "aws_subnet" "rds_subnet" {
 
   id = "subnet-0fcd804db9355aa05" # Replace with the ID of your existing subnet
 
 }
-
-
- 
 
 data "aws_security_group" "tom" {
 
@@ -38,9 +32,6 @@ data "aws_security_group" "tom" {
 
 # }
 
-
- 
-
 # resource "aws_subnet" "ecs_subnet" {
 
 #   cidr_block = "10.0.1.0/24"
@@ -49,9 +40,6 @@ data "aws_security_group" "tom" {
 
 # }
 
-
- 
-
 # Create an ECS cluster
 
 resource "aws_ecs_cluster" "my_cluster" {
@@ -59,10 +47,6 @@ resource "aws_ecs_cluster" "my_cluster" {
   name = "java-devops"
 
 }
-
-
- 
-
 # Create an IAM role for ECS tasks
 
 resource "aws_iam_role" "ecs_task_role" {
@@ -160,10 +144,6 @@ resource "aws_ecs_task_definition" "my_task_definition" {
   task_role_arn = aws_iam_role.ecs_task_role.arn
 
 }
-
-
- 
-
 # Create a service that runs tasks in the cluster
 
 resource "aws_ecs_service" "my_service" {
@@ -189,10 +169,6 @@ resource "aws_ecs_service" "my_service" {
   }
 
 }
-
-
- 
-
 # Create a security group for the ECS tasks
 
 # resource "aws_security_group" "ecs_security_group" {
@@ -200,9 +176,6 @@ resource "aws_ecs_service" "my_service" {
 #   name_prefix = "ecs-"
 
 #   vpc_id = defaultvpc.defaultvpc.id
-
-
- 
 
 #   ingress {
 
