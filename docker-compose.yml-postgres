@@ -20,7 +20,7 @@ services:
       - ./couponservice:/repo
     working_dir: /repo
     entrypoint: mvn -B
-    command: clean install
+    command: clean install -DskipTests
 
   mvn-product:
     build:
@@ -41,7 +41,7 @@ services:
       - ./productservice:/repo
     working_dir: /repo
     entrypoint: mvn -B
-    command: clean install
+    command: clean install -DskipTests  
 
   web-db:
     image: postgres:15.2
@@ -55,14 +55,14 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
 
-  db:
-    image: postgres
-    ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_DB=mydb
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+  #db:
+    #image: postgres
+    #ports:
+      #- "5432:5432"
+    #environment:
+      #- POSTGRES_DB=mydb
+      #- POSTGRES_USER=postgres
+      #- POSTGRES_PASSWORD=postgres
 
   coupon-app:
     build: 
@@ -76,7 +76,7 @@ services:
     ports:
       - "8090:8090"
     depends_on:
-      - db
+      - web-db
 
   product-app:
     build: 
@@ -88,4 +88,4 @@ services:
     ports:
       - "8091:8091"
     depends_on:
-      - db
+      - web-db

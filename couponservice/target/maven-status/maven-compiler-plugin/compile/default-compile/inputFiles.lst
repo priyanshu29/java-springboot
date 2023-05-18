@@ -1,4 +1,4 @@
-/home/priyanshu/repos/java-devops/couponservice/src/main/java/com/ideas/springcloud/repos/CouponRepo.java
-/home/priyanshu/repos/java-devops/couponservice/src/main/java/com/ideas/springcloud/controllers/CouponRestController.java
-/home/priyanshu/repos/java-devops/couponservice/src/main/java/com/ideas/springcloud/model/Coupon.java
-/home/priyanshu/repos/java-devops/couponservice/src/main/java/com/ideas/springcloud/CouponserviceApplication.java
+/repo/src/main/java/com/ideas/springcloud/model/Coupon.java
+/repo/src/main/java/com/ideas/springcloud/repos/CouponRepo.java
+/repo/src/main/java/com/ideas/springcloud/controllers/CouponRestController.java
+/repo/src/main/java/com/ideas/springcloud/CouponserviceApplication.java
